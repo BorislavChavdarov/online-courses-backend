@@ -1,6 +1,7 @@
 package com.boby.onlinecourses.models;
 
 
+import jakarta.persistence.*;
 import lombok.*;
 
 @NoArgsConstructor
@@ -8,13 +9,17 @@ import lombok.*;
 @Getter
 @Setter
 @EqualsAndHashCode
+@Entity
 public class User {
 
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private int userId;
     private String email;
     private String username;
     private String password;
-    private Role role;
+//    @ManyToOne
+//    private Role role;
+    private String Role;
     private String pictureUrl;
 
 }
