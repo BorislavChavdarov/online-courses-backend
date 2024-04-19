@@ -22,4 +22,15 @@ public class User {
     private String Role;
     private String pictureUrl;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", email='" + email + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", Role='" + Role + '\'' +
+                ", pictureUrl='" + pictureUrl + '\'' +
+                '}';
+    }
 }

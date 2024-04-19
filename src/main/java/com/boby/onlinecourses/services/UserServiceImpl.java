@@ -1,5 +1,7 @@
 package com.boby.onlinecourses.services;
 
+import com.boby.onlinecourses.exceptions.EntityDuplicateException;
+import com.boby.onlinecourses.exceptions.EntityNotFoundException;
 import com.boby.onlinecourses.models.Role;
 import com.boby.onlinecourses.models.User;
 import com.boby.onlinecourses.repositories.contracts.UserRepo;
@@ -18,10 +20,33 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public void regitserUser(User user, String role) {
-        //TODO: check if user exists
+    public User regitserUser(User user, String role) {
 
-        user.setRole(role);
-        userRepo.register(user);
+        boolean duplicateExists = true;
+        boolean emailExists = true;
+        try {
+            userRepo.getByUsername(user.getUsername());
+        } catch (EntityNotFoundException e) {
+            duplicateExists = false;
+        }
+
+        try {
+            userRepo.getByEmail(user.getEmail());
+        } catch (EntityNotFoundException e) {
+            emailExists = false;
+        }
+
+        if (duplicateExists) {
+            throw new EntityDuplicateException("User", "username", user.getUsername());
+        } else if (emailExists) {
+            throw new EntityDuplicateException("Email", "email name", user.getEmail());
+        } else {
+            user.setRole(role);
+            userRepo.register(user);
+            return user;
+        }
+
+
+
     }
 }
