@@ -45,6 +45,7 @@ public class SecurityConfig  {
                                 .requestMatchers("/admin/**").hasAnyRole("ADMIN")
                                 .requestMatchers("/error").permitAll()
                                 .requestMatchers("/api/v1/users").permitAll()
+                                .requestMatchers("/api/v1/courses").permitAll()
                                 .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
