@@ -1,7 +1,6 @@
 package com.boby.onlinecourses.config;
 
 
-import com.nimbusds.jose.jwk.RSAKey;
 
 import com.nimbusds.jose.jwk.RSAKey;
 
@@ -9,6 +8,7 @@ import java.security.KeyPair;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.util.UUID;
+
 
 public class Jwks {
 

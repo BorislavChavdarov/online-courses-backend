@@ -31,8 +31,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.List;
 
-import static org.springframework.security.oauth2.jose.jws.JwsAlgorithms.RS512;
-
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -63,15 +61,11 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests( auth -> auth
-                        .requestMatchers("/error").permitAll()
                         .requestMatchers("/token").permitAll()
-                        .requestMatchers("/api/v1/users").authenticated()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .oauth2ResourceServer((oauth2) -> oauth2
-                        .jwt(Customizer.withDefaults())
-                )
+                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
                 .build();
     }
 
@@ -84,18 +78,12 @@ public class SecurityConfig {
 
     @Bean
     JwtEncoder jwtEncoder(JWKSource<SecurityContext> jwks) {
-        JWKSet jwkSet = new JWKSet(rsaKey);
-        return new NimbusJwtEncoder((jwkSelector, securityContext) -> jwkSelector.select(jwkSet));
+        return new NimbusJwtEncoder(jwks);
     }
 
     @Bean
     JwtDecoder jwtDecoder() throws JOSEException {
-        rsaKey = Jwks.generateRsa();
-        System.out.println("public:"+rsaKey.getAlgorithm());
-        return NimbusJwtDecoder
-                .withPublicKey(rsaKey.toRSAPublicKey())
-                //.jwsAlgorithm(RS512)
-                .build();
+        return NimbusJwtDecoder.withPublicKey(rsaKey.toRSAPublicKey()).build();
     }
 
     @Bean
