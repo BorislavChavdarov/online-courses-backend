@@ -7,11 +7,14 @@ import com.boby.onlinecourses.models.User;
 import com.boby.onlinecourses.repositories.contracts.UserRepo;
 import com.boby.onlinecourses.services.contracts.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepo userRepo;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public UserServiceImpl(UserRepo userRepo) {
@@ -20,7 +23,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public User regitserUser(User user, String role) {
+    public User regitserUser(User user, String roles) {
 
         boolean duplicateExists = true;
         boolean emailExists = true;
@@ -41,7 +44,10 @@ public class UserServiceImpl implements UserService {
         } else if (emailExists) {
             throw new EntityDuplicateException("Email", "email name", user.getEmail());
         } else {
-            user.setRole(role);
+            System.out.println("user service");
+            String pass = user.getPassword();
+            user.setPassword("{bcrypt}"+passwordEncoder.encode(pass));
+            user.setRoles(roles);
             userRepo.register(user);
             return user;
         }

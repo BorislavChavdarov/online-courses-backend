@@ -48,15 +48,15 @@ public class UserController {
     @PostMapping("/api/v1/users")
     public User registerUser(@RequestBody @Valid UserDto userDto) {
 
-
+        System.out.println("user controller");
         User user = userMapper.userDtoToUser(userDto);
-        String role = userDto.getRole();
+        String roles = userDto.getRoles();
 
 
         try {
 
 
-            return userService.regitserUser(user,role);
+            return userService.regitserUser(user,roles);
         } catch (EntityDuplicateException e) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
         }

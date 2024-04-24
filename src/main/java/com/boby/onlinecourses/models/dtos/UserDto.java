@@ -37,7 +37,7 @@ public class UserDto {
 
 
     @NotNull
-    private String role;
+    private String roles;
 
     @Override
     public String toString() {
@@ -46,7 +46,7 @@ public class UserDto {
                 ", password='" + password + '\'' +
                 ", username='" + username + '\'' +
                 ", pictureUrl='" + pictureUrl + '\'' +
-                ", role='" + role + '\'' +
+                ", roles='" + roles + '\'' +
                 '}';
     }
 }

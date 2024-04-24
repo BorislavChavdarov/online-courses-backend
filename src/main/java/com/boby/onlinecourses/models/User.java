@@ -19,7 +19,8 @@ public class User {
     private String password;
 //    @ManyToOne
 //    private Role role;
-    private String Role;
+    //TODO fix role/roles in db
+    private String roles;
     private String pictureUrl;
 
     @Override
@@ -29,7 +30,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", Role='" + Role + '\'' +
+                ", Role='" + roles + '\'' +
                 ", pictureUrl='" + pictureUrl + '\'' +
                 '}';
     }
