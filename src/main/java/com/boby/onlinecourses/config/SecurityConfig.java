@@ -51,21 +51,12 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationManager authManager(JpaUserDetailsService jpaUserDetailsService) {
-        System.out.println("auth manager");
         var authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(jpaUserDetailsService);
         return new ProviderManager(authProvider);
     }
 
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        return new InMemoryUserDetailsManager(
-//                User.withUsername("boby")
-//                        .password("{noop}password")
-//                        .authorities("read")
-//                        .build()
-//        );
-//    }
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

@@ -25,9 +25,7 @@ public class UserRepoImpl implements UserRepo {
 
     @Override
     public void register(User user) {
-        System.out.println("repo");
         try (Session session = sessionFactory.openSession()) {
-            System.out.println("user repo");
             session.beginTransaction();
             session.persist(user);
             session.getTransaction().commit();
@@ -47,15 +45,12 @@ public class UserRepoImpl implements UserRepo {
 
     @Override
     public User getByUsername(String username) {
-        System.out.println("user repo");
-        System.out.println(username);
         try (Session session = sessionFactory.openSession()) {
             Query<User> query = session.createQuery("from User where username = :username", User.class);
             query.setParameter("username", username);
 
             List<User> result = query.list();
             if (result.isEmpty()) {
-                System.out.println("user repo - user not found");
                 throw new EntityNotFoundException("User", "username", username);
             }
 

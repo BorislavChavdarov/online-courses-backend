@@ -39,7 +39,7 @@ public class UserController {
         this.userMapper = userMapper;
     }
 
-    @PostMapping("/token")//TODO fix token generation
+    @PostMapping("/login")
     public String token(@RequestBody LoginRequest userLogin) throws AuthenticationException {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userLogin.username(), userLogin.password()));
         return tokenService.generateToken(authentication);
@@ -48,7 +48,6 @@ public class UserController {
     @PostMapping("/api/v1/users")
     public User registerUser(@RequestBody @Valid UserDto userDto) {
 
-        System.out.println("user controller");
         User user = userMapper.userDtoToUser(userDto);
         String roles = userDto.getRoles();
 

@@ -8,8 +8,6 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication()
-//@EntityScan(basePackages = {"**entities_package_name"})
-//@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
 public class OnlineCoursesApplication {
 
 	public static void main(String[] args) {

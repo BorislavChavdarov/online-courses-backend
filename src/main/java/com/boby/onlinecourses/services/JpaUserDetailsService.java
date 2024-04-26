@@ -26,9 +26,7 @@ public class JpaUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         try {
-            System.out.println("JPA service");
             User user = userRepo.getByUsername(username);
-            System.out.println(user.getUsername());
            return new SecurityUser(user);
         } catch (EntityNotFoundException e) {
             throw new UsernameNotFoundException("Username not found: " + username);

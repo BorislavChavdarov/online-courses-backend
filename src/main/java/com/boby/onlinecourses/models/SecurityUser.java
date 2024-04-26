@@ -12,7 +12,6 @@ public class SecurityUser implements UserDetails {
     private final User user;
 
     public SecurityUser(User user) {
-        System.out.println("security user");
         this.user = user;
     }
 

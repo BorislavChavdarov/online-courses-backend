@@ -44,7 +44,6 @@ public class UserServiceImpl implements UserService {
         } else if (emailExists) {
             throw new EntityDuplicateException("Email", "email name", user.getEmail());
         } else {
-            System.out.println("user service");
             String pass = user.getPassword();
             user.setPassword("{bcrypt}"+passwordEncoder.encode(pass));
             user.setRoles(roles);
