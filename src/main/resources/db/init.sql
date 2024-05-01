@@ -1,1 +1,2 @@
-CREATE DATABASE online_courses;
+DROP DATABASE IF EXISTS `online_courses`;
+CREATE DATABASE IF   NOT EXISTS `online_courses`;

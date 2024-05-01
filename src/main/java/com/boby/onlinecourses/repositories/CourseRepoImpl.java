@@ -15,6 +15,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+
+//TODO migrate all repositories to JpaRepository
 @Repository
 public interface CourseRepoImpl extends JpaRepository<Course, Integer>, JpaSpecificationExecutor<Course> {
 

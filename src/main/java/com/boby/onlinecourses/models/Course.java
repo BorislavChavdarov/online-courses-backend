@@ -14,17 +14,25 @@ import java.time.LocalDate;
 public class Course {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "course_id")
     private Integer courseId;
-    @Column(unique = true)
+    @Column(name = "title", unique = true)
     private String title;
-    private String category;
-    //TODO fix
-//    private User creator;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User creator;
 //    private LocalDate startingDate;
-//    private boolean isPublished;
+    @Column(name = "is_published")
+    private boolean isPublished;
 //    private double passingGrade;
 //    private double avgRating;
+
 
     @Override
     public String toString() {
@@ -32,6 +40,8 @@ public class Course {
                 "courseId=" + courseId +
                 ", title='" + title + '\'' +
                 ", category=" + category +
+                ", creator=" + creator +
+                ", isPublished=" + isPublished +
                 '}';
     }
 }

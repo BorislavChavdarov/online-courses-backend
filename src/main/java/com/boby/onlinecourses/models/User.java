@@ -10,17 +10,28 @@ import lombok.*;
 @Setter
 @EqualsAndHashCode
 @Entity
+@Table(name = "users")
 public class User {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private int userId;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "username")
     private String username;
+
+    @Column(name = "password")
     private String password;
-//    @ManyToOne
-//    private Role role;
-    //TODO fix role/roles in db
-    private String roles;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
+
+    @Column(name = "picture_url")
     private String pictureUrl;
 
     @Override
@@ -30,7 +41,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", Role='" + roles + '\'' +
+                ", Role='" + role.toString() + '\'' +
                 ", pictureUrl='" + pictureUrl + '\'' +
                 '}';
     }

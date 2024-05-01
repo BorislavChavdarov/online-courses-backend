@@ -1,5 +1,6 @@
 package com.boby.onlinecourses.models;
 
+import jakarta.persistence.*;
 import lombok.*;
 
 @NoArgsConstructor
@@ -7,7 +8,22 @@ import lombok.*;
 @Getter
 @Setter
 @EqualsAndHashCode
+@Entity
+@Table(name = "categories")
 public class Category {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "category_id")
     private int categoryId;
-    private String category;
+
+    @Column(name = "category_type")
+    private String categoryType;
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "categoryId=" + categoryId +
+                ", categoryType='" + categoryType + '\'' +
+                '}';
+    }
 }
