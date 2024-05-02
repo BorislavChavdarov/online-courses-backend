@@ -3,6 +3,7 @@ package com.boby.onlinecourses.controllers.rest;
 
 
 import com.boby.onlinecourses.exceptions.EntityDuplicateException;
+import com.boby.onlinecourses.exceptions.EntityNotFoundException;
 import com.boby.onlinecourses.models.LoginRequest;
 import com.boby.onlinecourses.models.User;
 import com.boby.onlinecourses.models.dtos.UserDto;
@@ -50,16 +51,18 @@ public class UserController {
     @PostMapping("/register")
     public User registerUser(@RequestBody @Valid UserDto userDto) {
 
-        User user = userMapper.userDtoToUser(userDto);
-        String roles = userDto.getRoles();
+
+
 
 
         try {
+            User user = userMapper.userDtoToUser(userDto);
 
-
-            return userService.regitserUser(user,roles);
+            return userService.regitserUser(user);
         } catch (EntityDuplicateException e) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, e.getMessage());
+        } catch (EntityNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }
 

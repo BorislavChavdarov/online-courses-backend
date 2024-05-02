@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public User regitserUser(User user, String roles) {
+    public User regitserUser(User user) {
         boolean duplicateExists = true;
         boolean emailExists = true;
         try {
@@ -51,13 +51,12 @@ public class UserServiceImpl implements UserService {
         } else {
 
 
-
-
+            System.out.println(user.getRole().getRoleType());
 
             Role role = user.getRole();
 
             if (role == null) {
-                throw new EntityNotFoundException("Role", "RoleName", user.getRole().getRoleType().toUpperCase());
+                throw new EntityNotFoundException("Role", "RoleType", user.getRole().getRoleType().toUpperCase());
             }
 
 

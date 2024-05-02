@@ -32,12 +32,12 @@ public class UserDto {
 
     @URL
     @Size(min = 2,max = 200,message = "Invalid profile picture URL")
-    private String pictureUrl;
+    private String picture_url;
 
 
 
     @NotNull
-    private String roles;
+    private String role_id;
 
     @Override
     public String toString() {
@@ -45,8 +45,8 @@ public class UserDto {
                 "email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", username='" + username + '\'' +
-                ", pictureUrl='" + pictureUrl + '\'' +
-                ", roles='" + roles + '\'' +
+                ", pictureUrl='" + picture_url + '\'' +
+                ", roles='" + role_id + '\'' +
                 '}';
     }
 }
