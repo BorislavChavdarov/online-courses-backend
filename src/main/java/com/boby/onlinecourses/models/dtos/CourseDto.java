@@ -10,10 +10,6 @@ import lombok.*;
 @EqualsAndHashCode
 public class CourseDto {
     @NotNull
-    private String course_id;
-    @NotNull
-    private String creator_id;
-    @NotNull
     private String category_id;
     @NotNull
     private String title;
@@ -21,8 +17,6 @@ public class CourseDto {
     @Override
     public String toString() {
         return "CourseDto{" +
-                "course_id='" + course_id + '\'' +
-                ", creator_id='" + creator_id + '\'' +
                 ", category_id='" + category_id + '\'' +
                 ", title='" + title + '\'' +
                 '}';
